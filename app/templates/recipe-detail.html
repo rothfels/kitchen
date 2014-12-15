@@ -1,0 +1,49 @@
+<ion-view title="{{recipe.recipeName}}">
+    <ion-content>
+        <!-- <iframe src="http://www.yummly.com/recipe/external/Ham-and-Egg-Crepe-Squares-Martha-Stewart-194007" style="width:100%;height:100%"></iframe> -->
+        <!-- <div ng-include src="http://www.yummly.com/recipe/external/Ham-and-Egg-Crepe-Squares-Martha-Stewart-194007"></div> -->
+        <div class="list card">
+
+            <div class="item item-avatar">
+                <img src="{{recipe.img}}">
+                <h2>{{recipe.name}}</h2>
+                <p>{{recipe.source}}</p>
+            </div>
+
+            <div class="item item-body" style="background:url('{{recipe.img}}');background-size:100%;background-repeat:no-repeat;">
+                <!--                 <img class="full-image" style="float:all;opacity:0.0;" src="http://lh3.ggpht.com/MRz_S0mWGp71ZVM2TaBHC3pXqaGiPD3jTcOM0CdvT6TC_5rB1713_0AE6Jg6CNrZ4K-mETz0yDFba_n3EGK9rA=s730-c-e365">
+ -->
+                <div class="list" style="opacity:0.9;">
+                    <!--    <div class="item item-toggle" ng-repeat="ingredient in recipe.ingredients">
+                        <b>{{ingredient}}</b> -->
+                    <ion-toggle toggle-class="toggle-assertive" ng-repeat="ingredient in ingredientsToggleMap" ng-model="ingredient.checked" ng-checked="ingredient.checked" ng-change="toggleIngredient(ingredient.name)">
+                        <b>{{ingredient.name}}</b>
+                    </ion-toggle>
+                </div>
+ <!--                <div class="item">
+                    <pre ng-bind="ingredientsToggleMap | json"></pre>
+                </div> -->
+                <p>
+                    <a href="#" class="subdued"><b>{{recipe.rating}} Stars</b></a>
+                    <a href="#" class="subdued"><b>{{recipe.timeInSeconds / 60}} Minutes</b></a>
+                </p>
+            </div>
+
+            <div class="item tabs tabs-secondary tabs-icon-left">
+                <a class="tab-item" href="#">
+                    <i class="icon ion-thumbsup"></i>
+                    Like
+                </a>
+                <a class="tab-item" href="#">
+                    <i class="icon ion-chatbox"></i>
+                    Comment
+                </a>
+                <a class="tab-item" href="#">
+                    <i class="icon ion-share"></i>
+                    Share
+                </a>
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>

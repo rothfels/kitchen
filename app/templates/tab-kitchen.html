@@ -1,0 +1,20 @@
+<ion-view title="Kitchen">
+  <!-- <ion-nav-buttons side="right">
+    <button menu-toggle="right" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons> -->
+  <ion-content class="has-header">
+    <ion-list>
+      <ion-item class="item-input">
+        <form name="newIngredient" ng-submit="addNewIngredient(nextIngredient); nextIngredient = ''; newIngredient.$setPristine();">
+          <input type="text" placeholder="add ingredient" ng-model="nextIngredient" />
+        </form>
+      </ion-item>
+      <ion-item class="item-button-right" ng-repeat="ingredient in ingredients" type="item-text-wrap">
+        {{ingredient.$value}}
+        <button class="button button-light" ng-click=removeIngredient(ingredient)>
+          <i class="icon ion-ios7-close-empty"></i>
+        </button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

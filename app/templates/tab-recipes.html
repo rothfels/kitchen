@@ -1,0 +1,61 @@
+<ion-view title="Recipes">
+  <!-- <ion-nav-buttons side="right">
+    <button menu-toggle="right" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons> -->
+    <ion-content class="has-header">
+        <div class="list">
+            <div class="row item item-button-right">
+                <label class="item-input item-icon-left ">
+                    <i class="icon ion-ios7-search-strong placeholder-icon"></i>
+                    <input style="margin-left:40px;" type="text" placeholder="search" ng-model="query">
+                </label>
+                <button class="button button-outline button-light" ng-click="searchControlsVisible = !searchControlsVisible">
+                    <i class="icon" ng-class="searchControlsVisible ? 'ion-ios7-minus-outline' : 'ion-ios7-plus-outline'"></i>
+                </button>
+            </div>
+            <div class="row item" ng-show="searchControlsVisible">
+                <label class="col">
+                    <div class="range">
+                        <i class="icon ion-ios7-more-outline"></i>
+                        <input type="range" name="editDistance" min="0" max="4" value="1" ng-model="editDistance" ng-change="getResults(editDistance, false)">
+                        <i class="icon ion-ios7-more"></i>
+                    </div>
+                    <b>Ingredients Needed: {{editDistance}}</b>
+                    <span style="float:right;">{{recipes.length}} matches found</span>
+                </label>
+            </div>
+            <div class="row item" ng-show="searchControlsVisible">
+                <div style="margin:1px;margin-top:5px;" class="button col col-50" ng-click="toggleGroup(groups.courses)" ng-class="{active: isGroupShown(groups.courses)}">
+                    <b>{{getCategoryFilterLabel('Courses')}}</b>
+                    <button class="item button-block item-accordion item-text-wrap	" ng-show="isGroupShown(groups.courses)" ng-click="setCourse('')">
+                        <b>All</b>
+                    </button>
+                    <button class="item button-block item-accordion item-text-wrap	" ng-repeat="item in groups.courses" ng-show="isGroupShown(groups.courses)" ng-click="setCourse(item)">
+                        <b>{{item}}</b>
+                    </button>
+                </div>
+                <div style="margin:1px;margin-top:5px;" class="button col col-50" ng-click="toggleGroup(groups.cuisines)" ng-class="{active: isGroupShown(groups.cuisines)}">
+                    <b>{{getCategoryFilterLabel('Cuisines')}}</b>
+                    <button class="item button-block button-energized item-accordion item-text-wrap	" ng-show="isGroupShown(groups.cuisines)" ng-click="setCuisine('')">
+                       <b>All</b>
+                    </button>
+                    <button class="item button-block item-accordion item-text-wrap	" ng-repeat="item in groups.cuisines" ng-show="isGroupShown(groups.cuisines)" ng-click="setCuisine(item)">
+                        <b>{{item}}</b>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="list">
+            <!-- <ion-item class="item-icon-right" ng-repeat="ingredient in ingredients" type="item-text-wrap" href="#/tab/kitchen/ingredient/{{ingredient.id}}" > -->
+            <a class="item item-thumbnail-left item-icon-right item-text-wrap" ng-repeat="recipe in recipes | filter:query | categoryFilter:courseCategory:'course' | categoryFilter:cuisineCategory:'cuisine'" type="item-text-wrap" href="#/tab/recipes/recipe/{{recipe.id}}">
+                <img src="{{recipe.img}}">
+                <h3>{{recipe.name}}</h3>
+                <h4>{{recipe.timeInSeconds / 60}} minutes, <i class="fa fa-star" ng-repeat="i in recipe.getRatingForCollectionRepeat()"></i>
+                </h4>
+                <h5>{{recipe.ingredients.join(', ')}}</h5>
+                <h5 style="color:red;">{{recipe.ingredientsMissing.join(', ')}}</h5>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+                </ion-item>
+                </ion-list>
+    </ion-content>
+</ion-view>
